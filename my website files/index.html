@@ -1,0 +1,651 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PhoneDeals | Find Your Best iPhone Deal</title>
+
+    <style>
+        /* General page styling */
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f5f6fa;
+            color: #222;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* Navigation bar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #172033;
+            padding: 15px 7%;
+        }
+
+        .logo {
+            color: white;
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #ff9800;
+        }
+
+        .navbar ul {
+            display: flex;
+            list-style: none;
+            gap: 22px;
+            padding: 0;
+            margin: 0;
+        }
+
+        .navbar ul a {
+            color: white;
+        }
+
+        .navbar ul a:hover {
+            color: #ff9800;
+        }
+
+        /* Homepage introduction */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+            padding: 65px 7%;
+            background: linear-gradient(135deg, #172033, #34476a);
+            color: white;
+        }
+
+        .hero-content {
+            max-width: 600px;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            color: #e0e5ef;
+            font-size: 17px;
+        }
+
+        .hero img {
+            width: 40%;
+            max-width: 400px;
+            border-radius: 15px;
+            object-fit: cover;
+        }
+
+        .button {
+            display: inline-block;
+            background-color: #ff9800;
+            color: #172033;
+            padding: 12px 22px;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 12px;
+        }
+
+        .button:hover {
+            background-color: #ffc15a;
+        }
+
+        /* General section styling */
+        .section {
+            padding: 50px 7%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .section-title h2 {
+            font-size: 30px;
+            margin-bottom: 5px;
+        }
+
+        .section-title p {
+            color: #666;
+        }
+
+        /* Table*/
+        .table {
+            margin: auto;
+        }
+
+        /* Product cards */
+        .products {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 25px;
+        }
+
+        .product-card {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px #00000010;
+            transition: transform 0.2s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-info h3 {
+            margin-top: 0;
+        }
+
+        .status {
+            display: inline-block;
+            color: #187744;
+            background-color: #e0f5e9;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 13px;
+        }
+
+        .out-of-stock {
+            color: #b42318;
+            background-color: #fee4e2;
+        }
+
+        /* Vendor information */
+        .vendor-section {
+            background-color: white;
+        }
+
+        .vendor-content {
+            max-width: 850px;
+            margin: auto;
+        }
+
+        .vendor-content li {
+            margin-bottom: 12px;
+        }
+
+        /* Contact section */
+        .contact {
+            text-align: center;
+            background-color: #e9edf5;
+        }
+
+        .contact a {
+            color: #b96b00;
+        }
+
+        /* Video */
+        .video-container {
+            max-width: 800px;
+            margin: auto;
+            aspect-ratio: 16 / 9;
+        }
+
+        .video-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 10px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #172033;
+            color: white;
+            padding: 35px 7% 15px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 30px;
+        }
+
+        footer a {
+            color: #ffb13b;
+        }
+
+        footer a:hover {
+            color: white;
+        }
+
+        .map iframe {
+            width: 100%;
+            height: 180px;
+            border: 0;
+            border-radius: 8px;
+        }
+
+        .copyright {
+            text-align: center;
+            border-top: 1px solid #455066;
+            margin-top: 25px;
+            padding-top: 15px;
+            font-size: 14px;
+        }
+
+        /* Mobile and tablet layout */
+        @media (max-width: 800px) {
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .navbar ul {
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 12px 18px;
+            }
+
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 45px 6%;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero img {
+                width: 100%;
+                max-width: 450px;
+            }
+
+            .products {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .footer-content {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 500px) {
+            .navbar ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .products,
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 35px 5%;
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation bar -->
+    <header>
+        <nav class="navbar">
+            <a href="#home" class="logo">
+                Phone<span>Deals</span>
+            </a>
+
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#shop">Shop Phones</a></li>
+                <li><a href="#vendors">Vendors</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="login.html">Log In / Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+
+        <!-- Homepage introduction -->
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <h1>Find Your Best iPhone Deal</h1>
+
+                <p>
+                    Tired of overpriced iPhones? PhoneDeals helps you
+                    discover affordable offers from phone dealers
+                    so you can compare your options and find a deal
+                    that suits your budget.
+                </p>
+
+                <p>
+                    Are you a phone dealer? Join our marketplace
+                    and connect with potential customers.
+                </p>
+
+                <a href="#shop" class="button">Explore Phones</a>
+                <a href="#vendors" class="button">Become a Vendor</a>
+            </div>
+
+            <img src="Images/iCell.webp"
+                 alt="Phones available at PhoneDeals">
+        </section>
+
+        <!-- Available phones -->
+        <section class="section" id="shop">
+            <div class="section-title">
+                <h2>Available Devices</h2>
+                <p>Explore our listed devices and contact a dealer for prices.</p>
+            </div>
+
+            <div class="products">
+
+                <article class="product-card">
+                    <img src="Images/wall.jpeg"
+                         alt="iPhone 6 and iPhone 6 Plus">
+
+                    <div class="product-info">
+                        <span class="status">Available</span>
+                        <h3>iPhone 6 Series</h3>
+                        <p>iPhone 6 and iPhone 6 Plus.</p>
+                        <p><strong>Price:</strong> Contact a dealer</p>
+                        <button class="button"
+                            onclick="contactDealer('iPhone 6 Series')">
+                            Ask About Phone
+                        </button>
+                    </div>
+                </article>
+
+                <article class="product-card">
+                    <img src="Images/wall.jpeg"
+                         alt="iPhone 11 series">
+
+                    <div class="product-info">
+                        <span class="status">Available</span>
+                        <h3>iPhone 11 Series</h3>
+                        <p>iPhone 11, 11 Pro and 11 Pro Max.</p>
+                        <p><strong>Price:</strong> Contact a dealer</p>
+                        <button class="button"
+                            onclick="contactDealer('iPhone 11 Series')">
+                            Ask About Phone
+                        </button>
+                    </div>
+                </article>
+
+                <article class="product-card">
+                    <img src="Images/iCell.webp"
+                         alt="iPhone 12 series">
+
+                    <div class="product-info">
+                        <span class="status">Available</span>
+                        <h3>iPhone 12 Series</h3>
+                        <p>iPhone 12 and iPhone 12 Pro.</p>
+                        <p><strong>Price:</strong> Contact a dealer</p>
+                        <button class="button"
+                            onclick="contactDealer('iPhone 12 Series')">
+                            Ask About Phone
+                        </button>
+                    </div>
+                </article>
+
+                <article class="product-card">
+                    <img src="Images/iCell.webp"
+                         alt="Apple iPad">
+
+                    <div class="product-info">
+                        <span class="status">Available</span>
+                        <h3>Apple iPads</h3>
+                        <p>Ask a dealer about available iPad models.</p>
+                        <p><strong>Price:</strong> Contact a dealer</p>
+                        <button class="button"
+                            onclick="contactDealer('Apple iPads')">
+                            Ask About Device
+                        </button>
+                    </div>
+                </article>
+
+                <article class="product-card">
+                    <img src="Images/wall.jpeg"
+                         alt="iPhone 5">
+
+                    <div class="product-info">
+                        <span class="status out-of-stock">
+                            Out of Stock
+                        </span>
+                        <h3>iPhone 5</h3>
+                        <p>This device is currently unavailable.</p>
+                        <p><strong>Price:</strong> Not available</p>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+ <section>
+<div style="text-align: center;">
+            <h2>PhoneDeals Price Comparison Table</h2>
+
+            <table border="1" cellpadding="10" class="table">
+
+                <tr>
+                    <th colspan="3">Available iPhones</th>
+                </tr>
+
+                <tr>
+                    <th>Phone Model</th>
+                    <th>Availability</th>
+                    <th>Price</th>
+                </tr>
+
+                <tr>
+                    <td>iPhone 6</td>
+                    <td>In Stock</td>
+                    <td>Contact Dealer</td>
+                </tr>
+
+                <tr>
+                    <td>iPhone 11</td>
+                    <td>In Stock</td>
+                    <td>Contact Dealer</td>
+                </tr>
+
+                <tr>
+                    <td>iPhone 12 Pro</td>
+                    <td>In Stock</td>
+                    <td>Contact Dealer</td>
+                </tr>
+
+                <tr>
+                    <td>iPhone 5</td>
+                    <td>Out of Stock</td>
+                    <td>Unavailable</td>
+                </tr>
+
+                <tr>
+                    <td colspan="3">
+                        Contact PhoneDeals for current prices
+                        and availability.
+                    </td>
+                </tr>
+
+            </table>
+
+        </section>
+    </div>
+
+        <!-- Vendor requirements -->
+        <section class="section vendor-section" id="vendors">
+            <div class="vendor-content">
+                <div class="section-title">
+                    <h2>Become a PhoneDeals Vendor</h2>
+                    <p>
+                        We want customers to connect with reliable
+                        phone dealers.
+                    </p>
+                </div>
+
+                <h3>Vendor Eligibility Requirements</h3>
+
+                <ol>
+                    <li>
+                        <strong>Business Registration:</strong>
+                        Provide a valid business registration
+                        certificate and relevant tax documents.
+                    </li>
+
+                    <li>
+                        <strong>Authorized Dealership:</strong>
+                        Provide proof of authorization where
+                        required by the products you sell.
+                    </li>
+
+                    <li>
+                        <strong>Operational Capacity:</strong>
+                        Have a physical shop or service centre,
+                        sufficient stock and the ability to
+                        support customers after a sale.
+                    </li>
+                </ol>
+
+                <p>
+                    Meeting these requirements does not automatically
+                    mean a vendor has been verified. Documents must
+                    be reviewed by the PhoneDeals team.
+                </p>
+
+                <button class="button" onclick="registerVendor()">
+                    Register as a Vendor
+                </button>
+            </div>
+        </section>
+
+        <!-- Helpful video -->
+        <section class="section" id="help">
+            <div class="section-title">
+                <h2>Need Help Choosing a Phone?</h2>
+                <p>Watch this helpful video before making your decision.</p>
+            </div>
+
+            <div class="video-container">
+                <iframe
+                    src="https://www.youtube.com/embed/eopPKANmKyg"
+                    title="Helpful phone buying video"
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </section>
+
+        <!-- Contact details -->
+        <section class="section contact" id="contact">
+            <div class="section-title">
+                <h2>Contact PhoneDeals</h2>
+                <p>Have questions? Get in touch with us.</p>
+            </div>
+
+            <p><strong>Contact Person:</strong> Gyenne Nicholas Kelvin</p>
+
+            <p>
+                <strong>Telephone:</strong>
+                <a href="tel:0206511511">0206511511</a>
+            </p>
+
+            <p>
+                <strong>Email:</strong>
+                <a href="mailto:kelvinnich25@gmail.com">
+                    kelvinnich25@gmail.com
+                </a>
+            </p>
+        </section>
+
+    </main>
+
+    <!-- Website footer -->
+    <footer>
+        <div class="footer-content">
+
+            <div>
+                <h3>PhoneDeals</h3>
+                <p>
+                    Connecting trusted dealers with customers
+                    looking for affordable phones.
+                </p>
+            </div>
+
+            <div>
+                <h3>Quick Links</h3>
+                <p><a href="#home">Home</a></p>
+                <p><a href="#shop">Shop Phones</a></p>
+                <p><a href="#vendors">Sell With Us</a></p>
+                <p><a href="#contact">Contact Us</a></p>
+            </div>
+
+            <div class="map">
+                <h3>Find Us</h3>
+
+                <iframe
+                    src="https://www.google.com/maps?q=Accra,Ghana&output=embed"
+                    title="Map showing Accra, Ghana"
+                    loading="lazy">
+                </iframe>
+            </div>
+
+        </div>
+
+        <div class="copyright">
+            <p>© 2026 PhoneDeals. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Show a message when a customer asks about a phone.
+        function contactDealer(phoneName) {
+            alert(
+                "You selected " + phoneName +
+                ". Dealer contact and pricing features will be added soon."
+            );
+        }
+
+        // Show a message when someone wants to become a vendor.
+        function registerVendor() {
+            alert(
+                "Thank you for your interest in PhoneDeals! " +
+                "The vendor registration form will be available soon."
+            );
+        }
+    </script>
+
+</body>
+</html>
